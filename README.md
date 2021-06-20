@@ -1,2 +1,2 @@
-# Mayas-FruitBowl
-A program to manage fruit in a fruit bowl
+# Mayas-Pizzas
+A computerised ordering system for Mayas Pizzas
