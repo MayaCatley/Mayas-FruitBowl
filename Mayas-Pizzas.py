@@ -1,4 +1,47 @@
+# allows for the order history to have a accurate date
 from datetime import date
+
+import re
+
+def validate_phone(str):
+    str = re.sub(r"\D", "", str)
+
+    valid = True
+
+    if re.match(r"^(64|04|02)", str):
+        if re.match(r"^64", str) and (len(str) < 10 or len(str) > 13):
+            valid = False
+        elif re.match(r"^04", str) and (len(str) < 8 or len(str) > 9):
+            valid = False
+        elif re.match(r"^(021|022|027)", str) and (len(str) < 10 or len(str) > 11):
+            valid = False
+    else:
+        valid = False
+
+    if valid:
+        return str
+    else:
+        print("This doesn't appear to be a valid phone number")
+        return pick_phone()
+
+
+def validate_name(name):
+    if len(name) < 2 or len(name) > 30:
+        print("The name must be between 2 and 30 characters.")
+        return pick_name()
+    else:
+        return name
+
+
+def validate_address(addr):
+    if len(addr) < 10 or len(addr) > 60:
+        print("The addresss must be between 10 and 60 characters")
+        return pick_address()
+    else:
+        return addr
+
+
+
 
 def get_integer(m, min=0, max=999999):
     getting_user_integer = True
@@ -19,7 +62,7 @@ def get_integer(m, min=0, max=999999):
 
 
 def get_string(m):
-    user_input = input(m)
+    user_input = input(m).strip()
     return user_input
 
 
@@ -28,24 +71,26 @@ def get_formatted_string(m):
     return user_input.upper().strip()
 
 
+
 def pick_name():
     name = get_string("What is your name: -> ")
-    return name
+    return validate_name(name)
 
 
 def pick_phone():
     phone = get_string("What is your phone number: -> ")
+    validate_phone(phone)
     return phone
 
-
 def pick_address():
-    address = get_string(
-        "What is your address (Street Number, Street Name, Suburb): -> ")
-    return address
+    address = get_string("What is your address (Street Number, Street Name, Suburb): -> ")
+    return validate_address(address)
 
 
+
+# function that prints out the pizza menu
 def print_menu(L):
-    print("Cost         Type")
+    print("    Cost         Type")
     index = 0
     for x in L:
         index += 1
@@ -54,14 +99,20 @@ def print_menu(L):
     return None
 
 
-def review_order(L):
-    print("Quantity    Cost     Type")
-    for x in L:
-        output = "{:<6} ---- ${:>4} -- {:<6}".format(x[1], x[2], x[0])
-        print(output)
-    return None
 
 
+# def review_order(L):
+    # print("Quantity    Cost     Type")
+    # for x in L:
+        # output = "{:<6} ---- ${:>4} -- {:<6}".format(x[1], x[2], x[0])
+        # print(output)
+    # return None
+
+
+
+
+
+# validation for (Y)es and (N)o questions
 def ask_yes_no(m):
     ask_again = get_formatted_string(m)
     if ask_again == "Y":
@@ -73,8 +124,11 @@ def ask_yes_no(m):
         return ask_yes_no(m)
 
 
-def print_current_order(current_order):
 
+
+
+def print_current_order(current_order):
+    # main portion of the programs cost feature
     cost = 0
     for x in current_order["items"]:
         cost += x[1]
@@ -83,14 +137,14 @@ def print_current_order(current_order):
     if is_delivery:
         cost += 3
 
+    # formating so the code prints nicely
     print("_" * 47)
     print("         CURRENT ORDER")
-    print("Name: {}    --   Phone: {}   ({})".format(current_order["name"], current_order["phone"], current_order["type"]))
+    print("Name: {}    --   Phone: {}    --   Order Type: {}".format(current_order["name"], current_order["phone"], current_order["type"]))
     print("Total: ${}".format(cost))
     print("   == Pizza ==")
 
     current_order["cost"] = cost
-
     pizzas = current_order["items"]
     if len(pizzas) == 0:
         print("You have not selected any pizzas")
@@ -109,11 +163,12 @@ def print_current_order(current_order):
 
 
 
+
+
 def order_pizza(current_order, pizza_list):
     max_order = 10
 
     max_input = len(current_order)
-
     print_menu(pizza_list)
     print_current_order(current_order)
 
@@ -138,13 +193,14 @@ def order_pizza(current_order, pizza_list):
 
 
 
+
+
 def remove_pizza(current_order):
     print_current_order(current_order)
 
     if len(current_order["items"]) == 0:
         print("There are no more pizzas to remove")
         return current_order
-
     choice = get_integer("Please pick a pizza you want to remove (0 to exit): -> ")
 
     if choice == 0:
@@ -157,6 +213,9 @@ def remove_pizza(current_order):
         return remove_pizza(current_order)
 
 
+
+
+
 def create_new_order(all_orders):
     current_order = {
         "date": date.today().isoformat(),
@@ -165,7 +224,6 @@ def create_new_order(all_orders):
         "items": []
     }
     current_order = pick_order_type(current_order)
-
     try:
         previous_orders = all_orders[current_order['phone']]
     except KeyError:
@@ -174,9 +232,12 @@ def create_new_order(all_orders):
     return current_order, previous_orders
 
 
+
+
+
 def pick_order_type(current_order):
     service = get_formatted_string(
-        "Would you like Delivery or Pickup or Quit (D/P/Q): -> ")
+        "Would you like (D)elivery or (P)ickup or (C)hoose Later (D/P/C): -> ")
 
     if service == "D":
         current_order["name"] = pick_name()
@@ -192,7 +253,12 @@ def pick_order_type(current_order):
         current_order["type"] = "Pickup"
         print("_" * 47)
         return current_order
-    elif service == "Q":
+    elif service == "C":
+        print("You have selected to choose Deliver or Pickup later")
+        current_order["name"] = pick_name()
+        current_order["phone"] = pick_phone()
+        current_order["type"] = "Not yet selected"
+        print("_" * 47)
         return current_order
     else:
         print("Unrecognised entry")
@@ -205,13 +271,30 @@ def confirm_order(current_order):
     if len(current_order["items"]) == 0:
         return False
 
-    confirm = ask_yes_no(
-        "Would you like to confirm your order, enter Y for yes and N for no: -> ")
+    if current_order["type"] == "Not yet selected":
+        service = get_formatted_string(
+            "Please select either (D)elivery or (P)ickup (D/P): -> ")
+        if service == "D":
+            current_order["address"] = pick_address()
+            current_order["type"] = "Delivery"
+            print("You have selected Delivery")
+            print("_" * 47)
+        elif service == "P":
+            current_order["type"] = "Pickup"
+            print("You have selected Pickup")
+            print("_" * 47)
+
+    confirm = ask_yes_no("Would you like to confirm your order, enter Y for yes and N for no: -> ")
     if confirm:
         print("Thank you for your order, it will be ready soon")
+        print("_" * 47)
+        print("_" * 47)
         return True
-    else:
-        return False
+
+    return False
+
+
+
 
 
 def find_pizza_by_name(name, pizza_list):
@@ -232,6 +315,9 @@ def clone_list(array):
     return array[:]
 
 
+
+
+
 def show_previous_orders(current_order, orders, pizza_list):
     print_current_order(current_order)
 
@@ -242,7 +328,6 @@ def show_previous_orders(current_order, orders, pizza_list):
     if orders is None:
         print("There are no previous orders")
         return
-
 
     index = 0
     for o in orders:
@@ -257,20 +342,20 @@ def show_previous_orders(current_order, orders, pizza_list):
     reorder = get_integer(
         "Enter the order number to add to your current order or 0 to exit: -> "
     )
-
     if reorder < 0 and reorder >= len(orders):
         print("Invalid input")
         show_previous_orders(current_order, orders, pizza_list)
     elif reorder > 0:
-        print(orders)
-        print(reorder)
         order = orders[reorder-1]
         for p in order["items"]:
             menu_pizza = find_pizza_by_name(p[0], pizza_list)
-            current_order["items"].append([menu_pizza[0], menu_pizza[1], p[2]])
+            current_order["items"].append([menu_pizza[0], menu_pizza[1], p[2], p[3]])
 
         show_previous_orders(current_order, orders, pizza_list)
     return
+
+
+
 
 
 def print_toppings(pizza, toppings, options):
@@ -290,6 +375,9 @@ def print_toppings(pizza, toppings, options):
         index += 1
         selected = "X" if x[0] in pizza[3] else " "
         print("{}. ({}) ${:<5}: {}".format(index, selected, x[1], x[0]))
+
+
+
 
 
 def update_cost_for_toppings(pizza, menu_pizza, toppings, options):
@@ -320,6 +408,8 @@ def update_cost_for_toppings(pizza, menu_pizza, toppings, options):
 
 
 
+
+
 def customise_pizza(pizza, toppings, options, pizza_list):
     print_toppings(pizza, toppings, options)
 
@@ -330,9 +420,7 @@ def customise_pizza(pizza, toppings, options, pizza_list):
 
     if choice == 0:
         return pizza
-
     menu_pizza = find_pizza_by_name(pizza[0], pizza_list)
-
     if 0 < choice <= len(toppings):
         idx = choice - 1
         try:
@@ -353,9 +441,12 @@ def customise_pizza(pizza, toppings, options, pizza_list):
         pizza[3] = pizza_options
         pizza = update_cost_for_toppings(pizza, menu_pizza, toppings, options)
     else:
-        print("You have to enter a number between 0 and {}".format(len(toppings)))
+        print("You have to enter a number between 0 and {}".format(len(toppings + options)))
 
     return customise_pizza(pizza, toppings, options, pizza_list)
+
+
+
 
 
 def customise_order(current_order, toppings, options, pizza_list):
@@ -376,6 +467,8 @@ def customise_order(current_order, toppings, options, pizza_list):
         print("You have to enter a number between 0 and {}".format(len(current_order["items"])))
 
     return customise_order(current_order, toppings, options, pizza_list)
+
+
 
 
 
@@ -446,7 +539,6 @@ def main():
     ]
 
     pizza_list = [
-        ["Custom", 15.00, [], []],
         ["Cheese", 16.50, ["Cheese"], []],
         ["Pepperoni", 18.50, ["Cheese", "Pepperoni"], []],
         ["Hawaian", 20.00, ["Cheese", "Ham", "Pineapple"], []],
@@ -460,9 +552,8 @@ def main():
     print("Welcome to Mymyz Pizzeria")
     print("_" * 47)
 
+
     current_order, previous_orders = create_new_order(all_orders)
-    print(current_order)
-    print(previous_orders)
 
     run_program = True
     while run_program:
