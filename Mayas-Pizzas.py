@@ -1,14 +1,20 @@
+"""This file is a pizza ordering system."""
+
+
+# https://www.programiz.com/python-programming/datetime/current-datetime
+# (the website i used for reference)
 # allows for the order history to have a accurate date
-# https://www.programiz.com/python-programming/datetime/current-datetime (the website i used for reference)
 from datetime import date
 
 # this allows for numbers to be searched for (specifically phone numbers)
 import re
 
+
+# https://www.sololearn.com/Discuss/2588446/solved-python-phone-number-validator
+# (the website i used for reference)
 # ensures that the user is entering a valid phone number
-# https://www.sololearn.com/Discuss/2588446/solved-python-phone-number-validator (the website i used for reference)
 def validate_phone(str):
-    """Make sure the users phone number is valid
+    """Make sure the users phone number is valid.
 
     :param str: string
     :return: pick_phone
@@ -23,16 +29,18 @@ def validate_phone(str):
     # if the number starts with 04 the total amount of letter have to be 8 or 9
     elif re.match(r"^04", str) and (len(str) < 8 or len(str) > 9):
         valid = False
-    # if the number starts with 021, 022, 027 the total amount of letter have to be 10 or 11
+    # if the number starts with 021, 022, 027
+    # the total amount of letter have to be 10 or 11
     elif re.match(r"^(021|022|027)", str) and (len(str) < 10 or len(str) > 11):
         valid = False
 
     return valid
 
 
-# this function makes sure that the user is entering a name that is between 2-30 characters
+# this function makes sure that the user is entering a name
+# that is between 2-30 characters
 def validate_name(name):
-    """Make sure the users name is between 2-30 characters long
+    """Make sure the users name is between 2-30 characters long.
 
     :param name: string
     :return: name
@@ -44,9 +52,10 @@ def validate_name(name):
         return name
 
 
-# this function makes sure that the user is entering an address that is between 10-60 letters
+# this function makes sure that the user is entering an address
+# that is between 10-60 letters
 def validate_address(addr):
-    """Make sure the users address is valid
+    """Make sure the users address is valid.
 
     :param addr: string
     :return: addr
@@ -61,7 +70,7 @@ def validate_address(addr):
 # this function makes sure that the user is entering is entering a number,
 # and that the number is within the min and max boundaries
 def get_integer(m, min=0, max=999999):
-    """Make sure the users number is valid
+    """Make sure the users number is valid.
 
     :param m: integer
     :param min: 0
@@ -82,9 +91,10 @@ def get_integer(m, min=0, max=999999):
     return user_input
 
 
-# these functions makes sure that regardless of the format used by the user, lowercase and capital letters are allowed
+# these functions makes sure that regardless of the format used by the user,
+# lowercase and capital letters are allowed
 def get_string(m):
-    """Format user input to same case
+    """Format user input to same case.
 
     :param m: string
     :return: user_input
@@ -94,7 +104,7 @@ def get_string(m):
 
 
 def get_formatted_string(m):
-    """Format user input to same case
+    """Format user input to same case.
 
     :param m: string
     :return: user_input.upper().strip()
@@ -103,9 +113,10 @@ def get_formatted_string(m):
     return user_input.upper().strip()
 
 
-# these functions gather information such as the users name, phone number and address, and makes sure they are validated
+# these functions gather information such as the users name,
+# phone number and address, and makes sure they are validated
 def pick_name():
-    """Ask for the users name
+    """Ask for the users name.
 
     :return: validate_name(name)
     """
@@ -114,7 +125,7 @@ def pick_name():
 
 
 def pick_phone():
-    """Ask for the users phone number
+    """Ask for the users phone number.
 
     :return: phone
     """
@@ -126,13 +137,14 @@ def pick_phone():
     if not validate_phone(phone):
         # if number doesn't appear valid, print message
         print("This doesn't appear to be a valid phone number")
-        #try again
-        return pick_phone();
+        # try again
+        return pick_phone()
 
     return phone
 
+
 def pick_address():
-    """Ask for the users address
+    """Ask for the users address.
 
     :return: validate_address(address)
     """
@@ -142,7 +154,7 @@ def pick_address():
 
 # function that prints out the pizza menu
 def print_menu(L):
-    """Print out the pizza menu
+    """Print out the pizza menu.
 
     :param L: list
     :return: None
@@ -158,7 +170,7 @@ def print_menu(L):
 
 # validation for (Y)es and (N)o questions
 def ask_yes_no(m):
-    """Ask user yes or no
+    """Ask user yes or no.
 
     :param m: string
     :return: ask_yes_no(m)
@@ -176,7 +188,7 @@ def ask_yes_no(m):
 
 # function that prints out the users current order
 def print_current_order(current_order):
-    """Print the users current order
+    """Print the users current order.
 
     :param current_order: list
     :return: None
@@ -193,16 +205,19 @@ def print_current_order(current_order):
     # formatting so the code prints nicely and looks like a receipt
     print("_" * 47)
     print("         CURRENT ORDER")
-    print("Name: {}    --   Phone: {}    --   Order Type: {}".format(current_order["name"], current_order["phone"], current_order["type"]))
+    print("Name: {}    --   Phone: {}    --   Order Type: {}"
+          .format(current_order["name"],current_order["phone"], current_order["type"]))
     print("Total: ${}".format(cost))
     print("   == Pizza ==")
 
-    # this means the cost is just from the current order, and not all previous orders
+    # this means the cost is just from the current order,
+    # and not all previous orders
     current_order["cost"] = cost
     # this means the "pizzas" are the amount of pizzas in the current order
     pizzas = current_order["items"]
 
-    # if the user tries to view their order, but they haven't ordered a pizza, the program will inform them
+    # if the user tries to view their order, but they haven't ordered a pizza,
+    # the program will inform them
     if len(pizzas) == 0:
         print("You have not selected any pizzas")
     # this prints out the users pizzas as well as any toppings, options and changes
@@ -213,8 +228,8 @@ def print_current_order(current_order):
                 i+1,
                 # pizza[0] is the name of the pizza, pizza[1] is the current price,
                 # pizza[2] is the toppings, and pizza[3] is the options
-                pizzas[i][1], # cost
-                pizzas[i][0], # pizza name
+                pizzas[i][1],  # cost
+                pizzas[i][0],  # pizza name
                 # "no changes" and "none selected' are printed
                 # instead of toppings and pizzas if the user hasn't changed anything
                 pizzas[i][2] if len(pizzas[i][2]) > 0 else "No changes",  # toppings
@@ -228,7 +243,7 @@ def print_current_order(current_order):
 
 # this is the function for ordering a pizza
 def order_pizza(current_order, pizza_list):
-    """Ask the user to order a pizza
+    """Ask the user to order a pizza.
 
     :param current_order: list
     :param pizza_list: list
@@ -249,6 +264,12 @@ def order_pizza(current_order, pizza_list):
     if choice == 0:
         return current_order
 
+    if len(current_order["items"]) >= MAX_ORDER_SIZE:  # max order size is 10 pizzas per order
+        print("You have selected our maximum order size of {} pizzas. "
+              "Please remove a pizza before adding a new one".format(
+            MAX_ORDER_SIZE))
+        return current_order
+
     # if the user selects a number from the menu, the pizza chosen is added onto their order
     if 0 < choice <= max_input:
         pizza = clone_list(pizza_list[choice-1])
@@ -258,10 +279,10 @@ def order_pizza(current_order, pizza_list):
         again = ask_yes_no("Would you like to order another pizza (Y/N): ->")
         # the user can't order another pizza if they already have purchased 10
         if again:
-            if len(current_order["items"]) >= MAX_ORDER_SIZE: # max order size is 10 pizzas per order
+            if len(current_order["items"]) >= MAX_ORDER_SIZE:  # max order size is 10 pizzas per order
                 print("You have selected our maximum order size of {} pizzas. "
                       "Please remove a pizza before adding a new one".format(
-                    MAX_ORDER_SIZE))
+                        MAX_ORDER_SIZE))
                 return current_order
             # return the user to the pizza menu to order again
             else:
@@ -276,7 +297,7 @@ def order_pizza(current_order, pizza_list):
 
 # this function allows the user to remove pizzas from their order
 def remove_pizza(current_order):
-    """Ask user to remove a pizza from their order
+    """Ask user to remove a pizza from their order.
 
     :param current_order: list
     :return: remove_pizza(current_order)
@@ -306,7 +327,7 @@ def remove_pizza(current_order):
 
 # this function is for creating a new order
 def create_new_order(all_orders):
-    """Create a new order
+    """Create a new order.
 
     :param all_orders: list
     :return: current_order, previous_orders
@@ -316,7 +337,7 @@ def create_new_order(all_orders):
         "date": date.today().isoformat(),  # finds current date and then is formatted to be "yyyy-mm-dd"
         "name": "",
         "type": "",
-        "items": [] # empty order to start
+        "items": []  # empty order to start
     }
     current_order = pick_order_type(current_order)
     # this categorises all the previous orders by phone number
@@ -331,7 +352,7 @@ def create_new_order(all_orders):
 
 # this function is so the user can pick Delivery, Pickup or Choose Later
 def pick_order_type(current_order):
-    """Ask user to pick Delivery, Pickup or Choose Later
+    """Ask user to pick Delivery, Pickup or Choose Later.
 
     :param current_order: list
     :return: current_order
@@ -361,7 +382,7 @@ def pick_order_type(current_order):
     # if they pick Choose Later, the following information is required,
     # and the order type is made to be "Not yet selected"
     elif service == "C":
-        print("You have selected to choose Deliver or Pickup later")
+        print("You have selected to choose Delivery or Pickup later")
         current_order["name"] = pick_name()
         current_order["phone"] = pick_phone()
         current_order["type"] = "Not yet selected"
@@ -375,7 +396,7 @@ def pick_order_type(current_order):
 
 # this function allows the user to confirm their order
 def confirm_order(current_order):
-    """Ask user to confirm order
+    """Ask user to confirm order.
 
     :param current_order: list
     :return: boolean
@@ -417,7 +438,7 @@ def confirm_order(current_order):
 # https://stackoverflow.com/questions/9542738/python-find-in-list (the website i used for reference)
 # this allows the program to find different pizzas from the list
 def find_pizza_by_name(name, pizza_list):
-    """Find the name of a pizza
+    """Find the name of a pizza.
 
     :param name: string
     :param pizza_list: list
@@ -429,7 +450,7 @@ def find_pizza_by_name(name, pizza_list):
 
 # this allows the program to find different toppings from the list
 def find_topping_by_name(name, toppings):
-    """Find the name of a topping
+    """Find the name of a topping.
 
     :param name: string
     :param toppings: list
@@ -440,7 +461,7 @@ def find_topping_by_name(name, toppings):
 
 # this allows the program to find different options from the list
 def find_option_by_name(name, options):
-    """Find the name of an option
+    """Find the name of an option.
 
     :param name: string
     :param options: list
@@ -451,7 +472,7 @@ def find_option_by_name(name, options):
 
 # this allows for the program to insert things into the list at a certain index
 def clone_list(array):
-    """Insert information into list
+    """Insert information into list.
 
     :param array: list
     :return: array
@@ -461,7 +482,7 @@ def clone_list(array):
 
 # this function allows the user to see previous orders under the same phone number
 def show_previous_orders(current_order, orders, pizza_list):
-    """Show user previous orders
+    """Show user previous orders.
 
     :param current_order: list
     :param orders: list
@@ -526,7 +547,7 @@ def show_previous_orders(current_order, orders, pizza_list):
 # pizza[0] is the name of the pizza, pizza[1] is the current price,
 # pizza[2] is the toppings, and pizza[3] is the options
 def print_toppings(pizza, toppings, options):
-    """Print topping and options list
+    """Print topping and options list.
 
     :param pizza: list
     :param toppings: list
@@ -560,7 +581,7 @@ def print_toppings(pizza, toppings, options):
 
 # this function is for updating the costs for any toppings or options selected
 def update_cost_for_toppings(pizza, menu_pizza, toppings, options):
-    """Update the cost of the toppings and options
+    """Update the cost of the toppings and options.
 
     :param pizza: list
     :param menu_pizza: list
@@ -605,7 +626,7 @@ def update_cost_for_toppings(pizza, menu_pizza, toppings, options):
 
 # this function is for customising a pizza once the user picks a pizza to customise
 def customise_pizza(pizza, toppings, options, pizza_list):
-    """Customise a chosen pizza
+    """Customise a chosen pizza.
 
     :param pizza: list
     :param toppings: list
@@ -671,7 +692,7 @@ def customise_pizza(pizza, toppings, options, pizza_list):
 
 # this function is for customising a pizza
 def customise_order(current_order, toppings, options, pizza_list):
-    """Choose a pizza to customise
+    """Choose a pizza to customise.
 
     :param current_order: list
     :param toppings: list
@@ -697,7 +718,8 @@ def customise_order(current_order, toppings, options, pizza_list):
     # if the user selects one of the pizzas in the order (current_order["items"])
     # that item is updated with the result from the customize_pizza method
     if 0 < choice <= len(current_order["items"]):
-        current_order["items"][choice-1] = customise_pizza(current_order["items"][choice-1], toppings, options, pizza_list)
+        current_order["items"][choice-1] = customise_pizza(
+            current_order["items"][choice-1], toppings, options, pizza_list)
     # helpful error message if the user enters a number greater or less than the items (pizzas)
     else:
         print("You have to enter a number between 0 and {}".format(len(current_order["items"])))
@@ -711,7 +733,7 @@ MAX_ORDER_SIZE = 10
 
 
 def main():
-    """Main function for ordering pizzas
+    """Main function for ordering pizzas.
 
     :rtype: object
     """
@@ -820,15 +842,12 @@ def main():
                 # if they don't want to, the program ends
                 else:
                     run_program = False
-                    print(all_orders)
                     print("_" * 47)
                     print("Thank you for using Mymyz Pizzeria's program")
                     print("_" * 47)
                     exit()
         elif user_choice == "Q":
             run_program = False
-            print(all_orders)
-            print("_" * 47)
             print("Thank you for using Mymyz Pizzeria's program")
             print("_" * 47)
             exit()
@@ -838,6 +857,7 @@ def main():
         print("_" * 47)
         print("Thank you, please select from the following options menu")
         print("_" * 47)
+
 
 if __name__ == "__main__":
     main()
