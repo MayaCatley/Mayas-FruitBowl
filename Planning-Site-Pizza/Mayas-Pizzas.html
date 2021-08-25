@@ -2,10 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Please put a title in</title>
+		<title>MyMyz Pizzeria</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
-		<meta name="author" content="ADD AUTHOR INFORMATION">
+		<meta name="Description" lang="en" content="An online pizza ordering program.">
+		<meta name="author" content="Author is Maya Catley">
 		<meta name="robots" content="index, follow">
 
 		<!-- icons -->
@@ -70,8 +70,8 @@
 <h2>Reflection</h2>
 <p>For Sprint 1 I made a program that allowed the user to view a pizza menu and then order a pizza. Sprint 1 has worked well,
 as it completes the important and necessary features my first version requires. In my next sprint (Sprint 2) I would like to have a way for
-the user to "eat the fruit", and essentially be able to take fruit away from the total, I would also like to have a delivery and pickup option,
-as well as a way to add fruit to the total value. The look of the program is easy to understand, due to the line formating. In
+the user to "eat the fruit", and essentially be able to take fruit away from the total, I would also like to have a delivery and pickup option.
+	The look of the program is easy to understand, due to the line formating. In
 later versions I will need to validate the users answers, as so far the program just producers an error message, instead of this
 the program should helpfuly inform the user that they have entered an invalid entry, and ask them to try and answer the question
 again. Later on in the program I will also need to add cost values to the different pizzas, as well as adding more pizzas to
@@ -149,6 +149,10 @@ will also make it easy for me to customise the pizzas in Sprint Four.</p>
 for the program to stop, in the next sprint this is definetly something I would have to fix as it is a crutial option for ordering
 a pizza. I also need to validate the users answers, although I will probably do this after adding the customise option. I also
 think it could be a good idea for the user to view previous orders, so they could see the customer history.</p>
+<p>Another thing I had to figure out for this Sprint was phone number validation, I tried mulipul different ways to acheive this.
+I first made it so the phone numbers had to be 8 digits, but I soon realised that this would decline lots of valid phone numbers,
+I then realised that the most accurate phone validation would be determining whether or not the number was valid based off the first
+2-3 digits of the phone number, this was a lot better and meant that all phone numbers accepted were actualy valid. </p>
 <hr>
 <hr>
 
@@ -177,21 +181,25 @@ Sprint Four should include the customisable pizza option and the resulting cost,
 <p>Sprint Four works very well and is esentialy finished aside from validation. The new customisable pizza function works well,
 and the previous order option works great. The printed our program needs a little bit of refining in terms of spacing, but on
 the whole looks effective.</p>
-<p>There are many things I would liked fixed in the final sprint, such as the discription after the user selects either
+<p>I also added a "enter 0 to quit" option, I originaly had the user always selecting "Q" to quit, but I didn't like the way a minor quit
+(just exiting back to the main menu) had the same command as a more major quit (exiting the program from the main menu). I think
+this also make the program easier to use as it became predictable that if the user ever wanted to return they selected "0", and if
+they wanted to fully quit they could choose "Q".</p>
+<p>There are many things I would liked fixed in the final sprint, such as the description after the user selects either
 	delivery or pickup ...</p>
 <p>			'date': '2021-07-21', 'name': 'Maya', 'type': 'Delivery', 'items': [], 'phone': '0237468564', 'address':
 	'31 Khandallah Road'</p>
 <p>I would also like to change the message the program finishes on, as currently the program ends on "Thank you, please
 select from the following options menu", as the program has ended and therefore no other options menu with be printed.
 I will need to do a lot of validating in Sprint Five for things like the customers name, and making sure its less than 50
-charcters long, also making sure the phone number is 8 digits, finding a way to validate the delivery location, and making
+characters long, also making sure the phone number is 8 digits, finding a way to validate the delivery location, and making
 sure that there is a helpful error message for every possible mistake the user could make.</p>
 
 <hr>
 <hr>
 
 	<h1 id="Sprint5">Sprint Five</h1>
-<p>This aim of Sprint Five is to fix a few formating and error messages, and to validate as much of the program as I can, to
+<p>This aim of Sprint Five is to fix a few formatting and error messages, and to validate as much of the program as I can, to
 	ensure that it is as user friendly as possible..</p>
 <br>
 <hr>
@@ -212,6 +220,12 @@ sure that there is a helpful error message for every possible mistake the user c
 I was able to validate the phone numbers to be the right length and format, as well as making the name and address be a certain length.
 With all possible user inputs that could require validation, I have also included a helpful error message that would advise the user
 on how they could avoid the error in the future.</p>
+<p>I did lots of testing during this final Sprint to make sure that there were no errors, I did this by essentially testing as many
+possible inputs as I could think of every time the program requested user input. By doing this I was able to see if my validation
+was working. I was also able to remove all the strings of information, such as the one mentioned in Sprint 4.</p>
+<p>As a whole I am super pleased with how my program functions, I was able to check off most of my Project Backlog (which can
+be seen bellow) including features I added without the intention of completing such as customisable pizzas. I also think my planning
+was very effective, as with a project as big as this one as it allowed for a clear overview of my project.</p>
 <hr>
 <h3>Here is a video of my Dad using my program, with me telling him the options and him picking.</h3>
 <p>Sorry the sound is super bad !! I used ScreenCast Matic and it couldn't record sound better.</p>
@@ -226,32 +240,47 @@ Your browser does not support the video tag.
 <img class="img-responsive" width="90%" src="assets/img/ProjectBacklog2.png" alt="">
 <br>
 <hr>
-<h1> Relevant Implications Summary</h1>
-				<p>remember to describe and then address</p>
+<h1 id="RelevantImplications"> Relevant Implications Summary</h1>
 <hr>
 <h3>Future Proofing</h3>
-<p>What is it? - Easy to update (adding new functionality and features -> new menu item and new function (function based build)),
-easy for another developer to work on and improve -> code commented, doc typing, program starts with main function (easy to
-understand how the code works).</p>
+<p>Future Proofing was essential to ensure that my program would not only function properly now, but in the future too.</p>
+<p>To do this, I made sure that my program was easy to update, I achieved this making sure it was easy to add new functionality
+and features, I addressed this by adding new menu items and new functions (as my program is a function based build) frequently
+to ensure no errors would arise. This is why it was so crucial to create the program by pushing each Sprint to Git to ensure that
+if a function happened to break a section of the program it was easy to go back to the previously working program.</p>
+<p>I also had to ensure that my program would be easy for another developer to work on and improve, I achieved this by making
+sure that majority of my code was commented with helpful and descriptive sentences briefly explaining the purpose of functions and
+lines of code, I also included doc typing in my code to document specific segments of my code, doc typing consists of
+listing the classes, exceptions and functions, and a one-line summary. As well a starting my program with a main function, all of
+these allow for the code to be easy to understand and simple to see how the code works.</p>
+<br>
 <h3>Functionality</h3>
-<p>What is it? - Program works properly -> does not crash, everything works properly(eg. total amounts) -> regulary and systematcly
-tested after each sprint (role play tests, other people use)</p>
+<p>Functionality was crucial when making sure that my program worked well, and that it had no bugs and wouldn't crash</p>
+<p>To do this I had to ensure that my program worked properly (for example when adding costs), and that it didn't crash,
+this means that I had to regularly and systematically test my program after each Sprint. I achieved this by getting my friends to
+test out my program as I went, and then finally getting my Dad to test it (which is the video above). It was so important
+to test my code regularly and fix errors as they happened, as it would have been so much more difficult to try and fix
+multiple errors at the same time. Another step I took to improve my program's functionality was to have separate component tests,
+this meant that I could trial sections of my code separately, so I could deal with any errors on a smaller scale, rather than
+trying to put the new code in straight away and all at once.
+</p>
+<p>Here is an example of some testing I did in regards to phone numbers. This was to test what numbers would be accepted and what
+numbers wouldn't. It was super helpful to do this test first as I could find errors much easier than searching all my code to find errors.</p>
+<img class="img-responsive" width="60%" src="assets/img/Test1.png" alt="">
+<br>
+<br>
 <h3>Usability</h3>
-<p>What is it? - Is the program easy to use -> informative user feedback, communicates if the user has made an error, fixes the
-error on its own if it can (strip spaces, and uppercase and lowercase letter), uses a consistant user navigation system
-(predictability) -> can return to main menu (0 to exit). Feedback when they have completed the task</p>
+<p>Usability makes sure that the user always knew what was going on.</p>
+<p>To do this I had to ensure my program was easy to use, to do this I made user the user was always receiving informative user feedback
+(I did this by constantly printing out an updated receipt with the users order, cost total, and choice of delivery/pickup/choose later),
+I made sure to communicate with the user if they made an error (for example "This doesn't appear to be a valid phone number")
+c, or coding it so my program was able to fix the error on its own; this was done by striping spaces, and converting uppercase and
+lowercase letters, I also made sure I used a consistent navigation system which can be seen on the main menu and in the receipt.</p>
+<p>I also made sure my program was predictable, I did this by making sure the user could always return to the main menu if they wanted
+I addressed this by making "enter 0 to exit" always an option. I also made it so the user was always receiving feedback once they
+completed a task, for example "You have selected to choose Delivery or Pickup later", this allows the user to understand what is
+currently happening, and not force them to guess.</p>
 <hr>
-					<h3>Buttons</h3>
-					<p>You can apply the <code>btn</code> class to any element that requires a button style.</p>
-					<p><a href="#" class="btn">Submit</a></p>
-					<hr>
-
-
-
-
-
-
-			
 			</div>
 			<div class="footer">
 				&copy; Maya S Catley Copyright 2021
