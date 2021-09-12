@@ -82,7 +82,7 @@ that would then add more money to their total, such as choosing extra cheese, or
 
 	<h1 id="Sprint2">Sprint Two</h1>
 <p>The aim of Sprint Two is to give the user the option to get their order delivered or the option for the user to pick it up
-	themself. Sprint Two should also allow the user to pick either delivery or pick-up and to remove pizzas they no longer want.</p>
+	themself to start the program. Sprint Two also allows the user add multiple pizzas at a time remove pizzas they no longer want.</p>
 <hr>
 <h4>Rough Program Plan</h4>
 <img class="img-responsive" width="90%" src="assets/img/Sprint2WrittenPlan.png" alt="">
@@ -118,7 +118,7 @@ this problem, I took the pizza list outside of the loop which was an easy fix.</
 
 	<h1 id="Sprint3">Sprint Three</h1>
 <p>This aim of Sprint Three I would also like to find a way to add costs to the users total order, have an option for the users
-current order to be printed, change whether or not the user wants to get their pizza delivered or if they want to collect it,
+receipt/ current order status to be printed, change whether or not the user wants to get their pizza delivered or if they want to collect it,
 and have the option to confirm their order. I would also like to fix the formatting of the program, and have it print out much more
 like an actual receipt would.</p>
 <hr>
@@ -148,12 +148,22 @@ will also make it easy for me to customise the pizzas in Sprint Four.</p>
 for the program to stop, in the next sprint this is definitely something I would have to fix as it is a crucial option for ordering
 a pizza. I also need to validate the users answers, although I will probably do this after adding the customise option. I also
 think it could be a good idea for the user to view previous orders, so they could see the customer history.</p>
+<p>Another problem that I found was actually implemented in Sprint Two, which was allowing the user to add multiple pizzas in one go,
+I decided to remove this from my code as it created problems when adding totals costs together, and would have made the print_current_order
+function much more complicated.</p>
+<p>I also struggled to get the order summery function to work, this is because when the order was printed out, the whole pizza list would
+print out regardless of what had been ordered, with amount would be next to them. This meant that pizzas were displayed even
+if the quantity of the pizza was 0. I fixed this by making it so pizza[0] is the name of the ordered pizza, pizza[1] is the current price,
+pizza[2] is the toppings, and pizza[3] is the options. This meant that rather than the whole list being printed, each pizza was
+printed separately and in components.</p>
+
 <hr>
 <hr>
 
 	<h1 id="Sprint4">Sprint Four</h1>
 <p>The aim of Sprint Four was to finish the printed program, so that all Sprint Five had to do was be validated. This means that
-Sprint Four should include the customisable pizza option and the resulting cost, view previous orders and confirm the order.</p>
+Sprint Four should include the customisable pizza option and the resulting cost, view previous orders, allow
+the user to pick delivery/pickup later on, and confirm the order.</p>
 <hr>
 <h4>Rough Program Plan</h4>
 <img class="img-responsive" width="90%" src="assets/img/Sprint4WrittenPlan.png" alt="">
@@ -171,7 +181,7 @@ Sprint Four should include the customisable pizza option and the resulting cost,
 <img class="img-responsive" width="70%" src="assets/img/Push4.png" alt="">
 <br>
 <hr>
-<h2>Reflection</h2>
+<h2>Sprint Review</h2>
 <p>Sprint Four works very well and is essentially finished aside from validation. The new customisable pizza function works well,
 and the previous order option works great. The printed our program needs a little bit of refining in terms of spacing, but on
 the whole looks effective.</p>
@@ -183,15 +193,31 @@ they wanted to fully quit they could choose "Q".</p>
 	delivery or pickup ...</p>
 <p>			'date': '2021-07-21', 'name': 'Maya', 'type': 'Delivery', 'items': [], 'phone': '0237468564', 'address':
 	'31 Khandallah Road'</p>
+<p>Another problem I encountered was to do with the receipt formatting, if the user didn't choose delivery or pickup and instead
+picked “Choose Later”, the program would crash when trying to order a pizza as there was no phone number. This was a problem because I made
+it so orders were categorised by the users phone number, and because it left a blank spot on the receipt.
+I fixed this by making it display "Not yet selected" as the service type, this also ties into the Usability Relevant Implication, as it keeps
+the user updated, and remind them that they will need to select an option later on.</p>
+<img class="img-responsive" width="40%" src="assets/img/ReceiptError.png" alt="">
+<br>
+<p>Another problem was with the custom pizza function and the users additions not saving.
+The problem occurred because menu_pizza / previous orders were being changed when customising the toppings/options so the new list is cloned
+this means the users changes are updated each time and will be modified everywhere. I solved this by cloning the new toppings and options.</p>
+<p>I also noticed that the previous orders function wasn't allowing the user to add their previous order to their current order, this error
+came up because I forgot to add p[3] which meant the toppings weren't there, and the pizza couldn't be found.</p>
+<img class="img-responsive" width="60%" src="assets/img/PreviousOrdersError.png" alt="">
+<br>
+<p>A decision I had to make while coding the custom pizza function was deciding to use checkboxes, originally I had the user selecting a
+printed out index number, this meant when it was printed the name of the topping/ option would be next to an index number which made it
+look like a quantity. So I researched and found that checkboxes would be a good solution. I made the checkboxes by first adding 1
+to the index so it starts from 1 and not 0 (as my quit option is 0), I then had the program to check if x[0] contained “X”, if it did
+it was replaced with nothing, and if it didn’t an “X” was added. This was a great addition to ensuring the Usability relevant implication
+was being considered, as it easily allows the user to see what options and toppings are selected so they always know whats going on.</p>
 <p>I would also like to change the message the program finishes on, as currently the program ends on "Thank you, please
 select from the following options menu", as the program has ended and therefore no other options menu with be printed.
 I will need to do a lot of validating in Sprint Five for things like the customers name, and making sure its less than 50
 characters long, also making sure the phone number is 8 digits, finding a way to validate the delivery location, and making
 sure that there is a helpful error message for every possible mistake the user could make.</p>
-<p>Another thing I had to figure out for this Sprint was phone number validation, I tried multiple different ways to achieve this.
-I first made it so the phone numbers had to be 8 digits, but I soon realised that this would decline lots of valid phone numbers,
-I then realised that the most accurate phone validation would be determining whether or not the number was valid based off the first
-2-3 digits of the phone number, this was a lot better and meant that all phone numbers accepted were actually valid. </p>
 <hr>
 <hr>
 
@@ -212,9 +238,26 @@ ensure that it is as user friendly as possible.</p>
 I was able to validate the phone numbers to be the right length and format, as well as making the name and address be a certain length.
 With all possible user inputs that could require validation, I have also included a helpful error message that would advise the user
 on how they could avoid the error in the future.</p>
+<p>Another thing I had to figure out for this Sprint was phone number validation, I tried multiple different ways to achieve this.
+I first made it so the phone numbers had to be 8 digits, but I soon realised that this would decline lots of valid phone numbers,
+I then realised that the most accurate phone validation would be determining whether or not the number was valid based off the first
+2-3 digits of the phone number, this was a lot better and meant that all phone numbers accepted were actually valid.
+I did this by changing the input for the phone number from get_integer to get_string. The reason for this was phone numbers might be
+input in a variety of ways:</p>
+  <li>021 063 0684</li>
+  <li>(+64) 21 063 0684</li>
+  <li>210 630 684</li>
+  <li>064210630684</li>
+<br>
+<p>I also saw another problem with my code, where the original phone number is printed on the receipt regardless of if the number is valid,
+This was happening because my program was only returning the phone number and not True/False, which meant that the first number
+the user entered was used, rather than their last/valid number.</p>
+<img class="img-responsive" width="40%" src="assets/img/PhoneNumberError.png" alt="">
+<br>
 <p>I did lots of testing during this final Sprint to make sure that there were no errors, I did this by essentially testing as many
 possible inputs as I could think of every time the program requested user input. By doing this I was able to see if my validation
 was working. I was also able to remove all the strings/descriptions of information, such as the one mentioned in Sprint 4.</p>
+<img class="img-responsive" width="60%" src="assets/img/NameValidation.png" alt="">
 <p>As a whole I am super pleased with how my program functions, I was able to check off most of my Project Backlog (which can
 be seen bellow) including features I added without the intention of completing such as customisable pizzas. I also think my planning
 was very effective, as with a project as big as this one as it allowed for a clear overview of my project.</p>
