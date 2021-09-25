@@ -1,21 +1,20 @@
-def get_string(m):
-    user_input = input(m).strip()
-    return user_input
+def get_formatted_string(m):
+    user_input = input(m)
+    return user_input.upper().strip()
 
-
-def validate_name(name):
-    if len(name) < 2 or len(name) > 30:
-        print("The name must be between 2 and 30 characters.")
-        return pick_name()
+def ask_yes_no(m):
+    ask_again = get_formatted_string(m)
+    if ask_again == "Y":
+        return True
+    elif ask_again == "N":
+        return False
     else:
-        return name
+        print("Enter Y/N")
+        return ask_yes_no(m)
 
-
-def pick_name():
-    name = get_string("What is your name: -> ")
-    return validate_name(name)
-
-pick_name()
+if __name__=="__main__":
+    x = ask_yes_no("Please confirm(Y/N) -> ")
+    print(x)
 
 
 

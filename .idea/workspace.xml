@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6aa8222-a426-41ae-9203-a90b1cca0af5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Planning-Site-Pizza/Mayas-Pizzas.html" beforeDir="false" afterPath="$PROJECT_DIR$/Planning-Site-Pizza/Mayas-Pizzas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +25,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.Mayas-Pizzas">
+  <component name="RunManager" selected="Python.testing">
     <configuration name="Maya" type="PythonConfigurationType" factoryName="Python">
       <module name="Mayas-Pizzas" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,8 +96,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Mayas-Pizzas" />
         <item itemvalue="Python.testing" />
+        <item itemvalue="Python.Mayas-Pizzas" />
       </list>
     </recent_temporary>
   </component>
